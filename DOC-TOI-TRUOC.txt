@@ -1,0 +1,14 @@
+SHOPNEST — ĐỌC FILE NÀY TRƯỚC
+
+Bạn KHÔNG cần sửa code.
+Bạn CHỈ việc tạo 3 tài khoản miễn phí và dán thông tin:
+
+  1. GitHub  — chứa code
+  2. Neon    — database
+  3. Vercel  — website + tên miền *.vercel.app
+
+Mở file:  HUONG-DAN-LEN-MANG.md
+Làm từ Bước 1 đến Bước 8.
+
+Xong bạn sẽ có:
+  https://ten-cua-ban.vercel.app

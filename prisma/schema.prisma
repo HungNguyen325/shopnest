@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  icon      String    @default("tag")
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+}
+
+model Product {
+  id             String    @id @default(cuid())
+  name           String
+  imageUrl       String?
+  originalUrl    String
+  resolvedUrl    String?
+  purchaseUrl    String
+  sourcePlatform String?
+  linkType       String    @default("direct")
+  productId      String?
+  shopId         String?
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  isDemo         Boolean   @default(false)
+  extractStatus  String    @default("success")
+  extractMessage String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([categoryId])
+  @@index([createdAt])
+}
+
+model SiteSettings {
+  id              String   @id @default("default")
+  siteName        String   @default("ShopNest")
+  logo            String?
+  tagline         String   @default("Sản phẩm chất lượng cho cuộc sống tốt đẹp hơn")
+  primaryColor    String   @default("#6B4226")
+  secondaryColor  String   @default("#C4A484")
+  backgroundColor String   @default("#F3E8DC")
+  surfaceColor    String   @default("#FFFFFF")
+  textColor       String   @default("#3D2B22")
+  mutedColor      String   @default("#8A7468")
+  borderColor     String   @default("#E8DDD0")
+  heroTitle       String   @default("Sản phẩm chất lượng")
+  heroSubtitle    String   @default("Cho cuộc sống tốt đẹp hơn")
+  heroDescription String   @default("Khám phá những sản phẩm tuyệt vời, đa dạng ngành hàng với mức giá tốt nhất tại ShopNest.")
+  aboutText       String   @default("ShopNest là thư viện sản phẩm cá nhân thông minh. Lưu link sản phẩm bạn muốn mua, tìm lại bất cứ lúc nào và mở trang mua hàng chỉ với một chạm.")
+  contactEmail    String   @default("hello@shopnest.local")
+  contactPhone    String   @default("")
+  footerNote      String   @default("Thư viện sản phẩm cá nhân — không phải sàn thương mại điện tử.")
+  updatedAt       DateTime @updatedAt
+}
+
+model ExtractLog {
+  id        String   @id @default(cuid())
+  url       String
+  success   Boolean
+  message   String?
+  createdAt DateTime @default(now())
+}

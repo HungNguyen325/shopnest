@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nest-bg: #f3e8dc;
+  --nest-surface: #ffffff;
+  --nest-text: #3d2b22;
+  --nest-muted: #8a7468;
+  --nest-border: #e8ddd0;
+  --nest-primary: #6b4226;
+  --nest-primary-hover: #7e5233;
+  --nest-secondary: #c4a484;
+  --nest-hero: #e8d4c4;
+  --nest-success: #2f9e6b;
+  --nest-warning: #c9892d;
+  --nest-error: #c44b5a;
+}
+
+.dark {
+  --nest-bg: #1a1410;
+  --nest-surface: #241c16;
+  --nest-text: #f6efe6;
+  --nest-muted: #b7a394;
+  --nest-border: rgba(244, 228, 210, 0.12);
+  --nest-primary: #d4b08c;
+  --nest-primary-hover: #e2c4a6;
+  --nest-secondary: #8a6a4e;
+  --nest-hero: #2a211b;
+}
+
+html,
+body {
+  background: var(--nest-bg);
+  color: var(--nest-text);
+}
+
+body {
+  min-height: 100vh;
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+
+::selection {
+  background: rgba(107, 66, 38, 0.18);
+}
+
+.dark ::selection {
+  background: rgba(212, 176, 140, 0.28);
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--nest-primary);
+  outline-offset: 2px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@keyframes nest-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-nest {
+  animation: nest-fade 220ms ease-out;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(107, 66, 38, 0.06) 25%,
+    rgba(107, 66, 38, 0.12) 37%,
+    rgba(107, 66, 38, 0.06) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .product-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
